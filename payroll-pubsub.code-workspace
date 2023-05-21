@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "api-key-verification"
+		},
+		{
+			"path": "fundamental-payroll-gin"
+		},
+		{
+			"path": "consumer-payroll"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}
