@@ -1,3 +1,4 @@
+//go:generate mockery --output=../mocks --name PayrollRMQPubRepoI
 package repository
 
 import "fundamental-payroll-gin/model"

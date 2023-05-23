@@ -1,4 +1,4 @@
-//go:generate mockery --output=../mocks --name EmployeeUsecase
+//go:generate mockery --output=../mocks --name EmployeeUsecaseI
 package usecase
 
 import "fundamental-payroll-gin/model"

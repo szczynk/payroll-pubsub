@@ -10,7 +10,7 @@ import (
 )
 
 type PayrollRMQHandler struct {
-	rmq           *rmq.RMQ
+	rmq           rmq.InterfaceRMQ
 	payrollUC     usecase.PayrollUsecaseI
 	logger        *zerolog.Logger
 	exchangeName  string
@@ -19,7 +19,7 @@ type PayrollRMQHandler struct {
 }
 
 func NewPayrollRMQHandler(
-	rmq *rmq.RMQ,
+	rmq rmq.InterfaceRMQ,
 	logger *zerolog.Logger,
 	payrollUC usecase.PayrollUsecaseI,
 ) PayrollRMQHandlerI {

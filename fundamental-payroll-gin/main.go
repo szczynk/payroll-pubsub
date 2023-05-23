@@ -27,7 +27,6 @@ func main() {
 		logger.Fatal().Err(errRmq).Msg("rabbitmq failed to connect")
 	}
 	logger.Debug().Msg("rabbitmq connected")
-	rmq.SetupBlockingNotifications(logger)
 
 	gormDB, errDB := db.NewGormDB(config.Debug, config.Database.Driver, config.Database.URL)
 	if errDB != nil {
@@ -55,11 +54,17 @@ func main() {
 	payrollUC := usecase.NewPayrollUsecase(payrollRepo, payrollPub, employeeRepo, salaryRepo)
 	salaryUC := usecase.NewSalaryUsecase(salaryRepo)
 
+	pingHandler := handler.NewPingGinHandler()
 	employeeHandler := handler.NewEmployeeGinHandler(employeeUC)
 	payrollHandler := handler.NewPayrollGinHandler(payrollUC)
 	salaryHandler := handler.NewSalaryGinHandler(salaryUC)
+	apiKeyVerificationHandler := handler.NewAPIKeyGinHandler(config.APIVerificationURL)
 
-	router := server.NewRouter(config.Debug, logger, employeeHandler, payrollHandler, salaryHandler)
+	router := server.NewRouter(
+		config.Debug, config.APIVerificationURL, logger,
+		pingHandler,
+		employeeHandler, payrollHandler, salaryHandler, apiKeyVerificationHandler,
+	)
 
 	srv := &http.Server{
 		Addr:         ":" + config.Port,

@@ -6,7 +6,6 @@ import (
 	"fundamental-payroll-gin/helper/timeout"
 
 	"github.com/rabbitmq/amqp091-go"
-	"github.com/rs/zerolog"
 )
 
 type RMQ struct {
@@ -15,7 +14,7 @@ type RMQ struct {
 	Ch   *amqp091.Channel
 }
 
-func NewRMQ(url string) (*RMQ, error) {
+func NewRMQ(url string) (InterfaceRMQ, error) {
 	if url == "" {
 		return nil, errors.New("no database url")
 	}
@@ -73,19 +72,6 @@ func (r *RMQ) ConnClose() error {
 
 func (r *RMQ) ChClose() error {
 	return r.Ch.Close()
-}
-
-func (r *RMQ) SetupBlockingNotifications(logger *zerolog.Logger) {
-	blockings := r.Conn.NotifyBlocked(make(chan amqp091.Blocking))
-	go func() {
-		for b := range blockings {
-			if b.Active {
-				logger.Debug().Msgf("rabbitmq tcp blocked: %q", b.Reason)
-			} else {
-				logger.Debug().Msg("rabbitmq tcp unblocked")
-			}
-		}
-	}()
 }
 
 func (r *RMQ) Publish(exchangeName, routingKeyPub string, dataBytes []byte) error {

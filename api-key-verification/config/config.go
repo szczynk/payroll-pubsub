@@ -8,7 +8,6 @@ type Config struct {
 	Debug      bool   `mapstructure:"debug"`
 	Port       string `mapstructure:"port"`
 	Passphrase string `mapstructure:"passphrase"`
-	APIURL     string `mapstructure:"api_url"`
 }
 
 func LoadConfig() (*Config, error) {

@@ -29,18 +29,18 @@ func NewJSONResErr(c *gin.Context, statusCode int, err string) {
 	})
 }
 
-func NewJSONResMsg(c *gin.Context, statusCode int, msg string, data any) {
-	c.JSON(statusCode, JSONRes{
-		Status:  statusCode,
-		Message: msg,
-		Data:    data,
-	})
-}
+// func NewJSONResMsg(c *gin.Context, statusCode int, msg string, data any) {
+// 	c.JSON(statusCode, JSONRes{
+// 		Status:  statusCode,
+// 		Message: msg,
+// 		Data:    data,
+// 	})
+// }
 
-func NewJSONResMsgErr(c *gin.Context, statusCode int, msg string, err string) {
-	c.JSON(statusCode, JSONRes{
-		Status:  statusCode,
-		Message: msg,
-		Error:   err,
-	})
-}
+// func NewJSONResMsgErr(c *gin.Context, statusCode int, msg string, err string) {
+// 	c.JSON(statusCode, JSONRes{
+// 		Status:  statusCode,
+// 		Message: msg,
+// 		Error:   err,
+// 	})
+// }

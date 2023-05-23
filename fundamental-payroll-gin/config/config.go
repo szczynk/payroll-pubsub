@@ -8,6 +8,8 @@ type Config struct {
 	Debug bool   `mapstructure:"debug"`
 	Port  string `mapstructure:"port"`
 
+	APIVerificationURL string `mapstructure:"api_key_verification_url"`
+
 	Database Database `mapstructure:"db"`
 	RabbitMQ RabbitMQ `mapstructure:"rabbitmq"`
 }

@@ -10,14 +10,14 @@ import (
 )
 
 type PayrollRMQPubRepo struct {
-	rmq           *rmq.RMQ
+	rmq           rmq.InterfaceRMQ
 	logger        *zerolog.Logger
 	exchangeName  string
 	routingKeyPub string
 	routingKeyCon string
 }
 
-func NewPayrollRMQPubRepo(rmq *rmq.RMQ, logger *zerolog.Logger) PayrollRMQPubRepoI {
+func NewPayrollRMQPubRepo(rmq rmq.InterfaceRMQ, logger *zerolog.Logger) PayrollRMQPubRepoI {
 	r := new(PayrollRMQPubRepo)
 	r.rmq = rmq
 	r.logger = logger
@@ -51,7 +51,7 @@ func (r *PayrollRMQPubRepo) Add(payroll *model.Payroll) (*model.Payroll, error) 
 		return nil, err
 	}
 
-	done := make(chan *model.Payroll)
+	done := make(chan *model.Payroll, 1)
 	go func() {
 		for msg := range msgs {
 			r.logger.Debug().Msgf("from consumer-payroll Received a message: %s", msg.Body)

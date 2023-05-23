@@ -1,4 +1,4 @@
-//go:generate mockery --output=../mocks --name PayrollRepository
+//go:generate mockery --output=../mocks --name PayrollRepositoryI
 package repository
 
 import "fundamental-payroll-gin/model"

@@ -24,7 +24,6 @@ func main() {
 		logger.Fatal().Err(errRmq).Msg("rabbitmq failed to connect")
 	}
 	logger.Debug().Msg("rabbitmq connected")
-	rmq.SetupBlockingNotifications(logger)
 
 	gormDB, errDB := db.NewGormDB(config.Debug, config.Database.Driver, config.Database.URL)
 	if errDB != nil {

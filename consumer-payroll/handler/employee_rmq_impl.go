@@ -10,7 +10,7 @@ import (
 )
 
 type EmployeeRMQHandler struct {
-	rmq           *rmq.RMQ
+	rmq           rmq.InterfaceRMQ
 	employeeUC    usecase.EmployeeUsecaseI
 	logger        *zerolog.Logger
 	exchangeName  string
@@ -19,7 +19,7 @@ type EmployeeRMQHandler struct {
 }
 
 func NewEmployeeRMQHandler(
-	rmq *rmq.RMQ,
+	rmq rmq.InterfaceRMQ,
 	logger *zerolog.Logger,
 	employeeUC usecase.EmployeeUsecaseI,
 ) EmployeeRMQHandlerI {

@@ -34,7 +34,7 @@ func (h *EmployeeGinHandler) List(c *gin.Context) {
 
 func (h *EmployeeGinHandler) Add(c *gin.Context) {
 	employeeReq := new(model.EmployeeRequest)
-	if bindErr := c.ShouldBindJSON(employeeReq); bindErr != nil {
+	if bindErr := c.ShouldBindJSON(&employeeReq); bindErr != nil {
 		response.NewJSONResErr(c, http.StatusBadRequest, bindErr.Error())
 		return
 	}
